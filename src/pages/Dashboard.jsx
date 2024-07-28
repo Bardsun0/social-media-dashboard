@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { pageTransition, pageVariants } from "../utils/animations";
 
 function Dashboard() {
   return (
-    <div className="min-h-screen font-sans text-black p-4 pt-28">
-      <h1 className="text-4xl font-heading font-bold mb-8">
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+      className="min-h-screen font-sans text-black p-4 pt-28"
+    >
+      <h1 className="text-4xl font-heading font-bold mb-8 text-text-light">
         Dashboard
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -24,7 +32,7 @@ function Dashboard() {
           description="View your post analytics"
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -35,10 +43,10 @@ function DashboardCard({ to, title, description }) {
         to={to}
         className="block bg-white p-6 rounded-lg shadow-card hover:shadow-lg transition duration-300"
       >
-        <h2 className="text-2xl font-heading font-bold mb-2">
+        <h2 className="text-2xl font-heading font-bold mb-2 text-primary">
           {title}
         </h2>
-        <p className="text-text">{description}</p>
+        <p className="text-text-dark font-body">{description}</p>
       </Link>
     </motion.div>
   );

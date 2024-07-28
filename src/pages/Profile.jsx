@@ -28,11 +28,15 @@ function Profile() {
       transition={pageTransition}
       className="min-h-screen flex items-center justify-center p-4"
     >
-      <div className="bg-white p-6 rounded-lg shadow-md max-w-lg w-full">
-        <h1 className="text-3xl font-bold mb-4 text-center">Profile</h1>
+      <div className="bg-white p-6 rounded-lg shadow-card max-w-lg w-full">
+        <h1 className="text-3xl font-heading font-bold mb-4 text-center text-primary">
+          Profile
+        </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
+            <label className="block text-text-dark font-body text-xl">
+              Name
+            </label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -41,11 +45,13 @@ function Profile() {
               className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
+              <p className="text-accent font-accent">{errors.name.message}</p>
             )}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+            <label className="block text-text-dark font-body text-xl">
+              Email
+            </label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -54,28 +60,34 @@ function Profile() {
               className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+              <p className="text-accent font-accent">{errors.email.message}</p>
             )}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Profile Picture</label>
+            <label className="block text-text-dark font-body text-xl">
+              Profile Picture
+            </label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               type="file"
               {...register("profilePicture")}
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full mt-2 p-2 text-text-dark font-body text-xl border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.profilePicture && (
-              <p className="text-red-500">{errors.profilePicture.message}</p>
+              <p className="text-accent font-accent">
+                {errors.profilePicture.message}
+              </p>
             )}
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            className="w-full bg-secondary text-white py-3 rounded-md hover:bg-opacity-90 transition duration-300 font-body font-bold"
           >
             Update Profile
-          </button>
+          </motion.button>
         </form>
       </div>
     </motion.div>

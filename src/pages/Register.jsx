@@ -48,7 +48,7 @@ function Register() {
               className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
+              <p className="text-accent font-accent">{errors.name.message}</p>
             )}
           </div>
           <div className="mb-4">
@@ -61,7 +61,7 @@ function Register() {
               className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+              <p className="text-accent font-accent">{errors.email.message}</p>
             )}
           </div>
           <div className="mb-4">
@@ -74,7 +74,9 @@ function Register() {
               className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.password && (
-              <p className="text-red-500">{errors.password.message}</p>
+              <p className="text-accent font-accent">
+                {errors.password.message}
+              </p>
             )}
           </div>
           <motion.button

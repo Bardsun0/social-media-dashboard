@@ -23,9 +23,6 @@ export default {
       boxShadow: {
         card: "0 4px 6px rgba(0, 0, 0, 0.1)",
       },
-      backgroundImage: {
-        "gradient-bg": "linear-gradient(135deg, #353698 0%, #c3cfe2 100%)",
-      },
     },
   },
   variants: {

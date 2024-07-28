@@ -29,10 +29,14 @@ function PostSchedule() {
       className="min-h-screen flex items-center justify-center p-4"
     >
       <div className="bg-white p-6 rounded-lg shadow-md max-w-lg w-full">
-        <h1 className="text-3xl font-bold mb-4 text-center">Post Schedule</h1>
+        <h1 className="text-3xl font-heading font-bold mb-4 text-center text-primary">
+          Post Schedule
+        </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-gray-700">Post Content</label>
+            <label className="block text-text-dark font-body text-xl">
+              Post Content
+            </label>
             <motion.textarea
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -40,40 +44,44 @@ function PostSchedule() {
               className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             ></motion.textarea>
             {errors.content && (
-              <p className="text-red-500">{errors.content.message}</p>
+              <p className="text-accent font-accent">
+                {errors.content.message}
+              </p>
             )}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Media</label>
+            <label className="block text-text-dark font-body text-xl">Media</label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               type="file"
               {...register("media")}
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full mt-2 p-2 text-text-dark font-body text-xl border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.media && (
-              <p className="text-red-500">{errors.media.message}</p>
+              <p className="text-accent font-accent">{errors.media.message}</p>
             )}
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Schedule Date</label>
+            <label className="block text-text-dark font-body text-xl">Schedule Date</label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               type="date"
               {...register("scheduleDate")}
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full mt-2 p-2 text-text-dark font-body text-xl border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.scheduleDate && (
-              <p className="text-red-500">{errors.scheduleDate.message}</p>
+              <p className="text-accent font-accent">
+                {errors.scheduleDate.message}
+              </p>
             )}
           </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            className="w-full bg-secondary text-white py-3 rounded-md hover:bg-opacity-90 transition duration-300 font-body font-bold"
           >
             Schedule Post
           </motion.button>
