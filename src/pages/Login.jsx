@@ -62,12 +62,14 @@ function Login() {
               <p className="text-red-500">{errors.password.message}</p>
             )}
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             type="submit"
             className="w-full bg-primary text-white py-3 rounded-md hover:bg-primary-dark transition duration-300"
           >
             Login
-          </button>
+          </motion.button>
         </form>
         <p className="mt-4 text-center">
           Don't have an account?{" "}

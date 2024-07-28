@@ -6,8 +6,9 @@ import { registerSchema } from "../utils/validationSchemas";
 import { pageTransition, pageVariants } from "../utils/animations";
 
 function Register() {
-  // react-hook-form ile form yönetimi
   const navigate = useNavigate();
+
+  // react-hook-form ile form yönetimi
   const {
     register,
     handleSubmit,
