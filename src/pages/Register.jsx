@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Register() {
   return (
@@ -8,15 +9,30 @@ function Register() {
         <form>
           <div className="mb-4">
             <label className="block text-gray-700">Name</label>
-            <input type="text" className="w-full mt-2 p-2 border rounded" />
+            <motion.input
+              whileFocus={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              type="text"
+              className="w-full mt-2 p-2 border rounded"
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
-            <input type="email" className="w-full mt-2 p-2 border rounded" />
+            <motion.input
+              whileFocus={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              type="email"
+              className="w-full mt-2 p-2 border rounded"
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
-            <input type="password" className="w-full mt-2 p-2 border rounded" />
+            <motion.input
+              whileFocus={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              type="password"
+              className="w-full mt-2 p-2 border rounded"
+            />
           </div>
           <button
             type="submit"
