@@ -1,29 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { motion } from "framer-motion";
-
-const pageVariants = {
-  initial: { opacity: 0, y: "-100vh" },
-  in: { opacity: 1, y: 0 },
-  out: { opacity: 0, y: "100vh" },
-};
-
-const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
-  duration: 0.5,
-};
-
-// Yup doğrulama şeması
-const schema = yup.object().shape({
-  name: yup.string().required("İsim zorunludur"),
-  email: yup
-    .string()
-    .email("Geçerli bir e-posta girin")
-    .required("E-posta zorunludur"),
-  profilePicture: yup.mixed().required("Profil resmi zorunludur"),
-});
+import { profileSchema } from "../utils/validationSchemas";
+import { pageTransition, pageVariants } from "../utils/animations";
 
 function Profile() {
   // react-hook-form ile form yönetimi
@@ -32,11 +11,12 @@ function Profile() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(profileSchema),
   });
 
   const onSubmit = (data) => {
     console.log(data);
+    // Burada profil güncelleme işlemlerini yapacaksınız
   };
 
   return (

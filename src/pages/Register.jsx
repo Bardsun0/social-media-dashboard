@@ -1,38 +1,37 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
-// Yup doğrulama şeması
-const schema = yup.object().shape({
-  name: yup.string().required("İsim zorunludur"),
-  email: yup
-    .string()
-    .email("Geçerli bir e-posta girin")
-    .required("E-posta zorunludur"),
-  password: yup
-    .string()
-    .min(6, "Şifre en az 6 karakter olmalıdır")
-    .required("Şifre zorunludur"),
-});
+import { registerSchema } from "../utils/validationSchemas";
+import { pageTransition, pageVariants } from "../utils/animations";
 
 function Register() {
   // react-hook-form ile form yönetimi
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(registerSchema),
   });
 
   const onSubmit = (data) => {
     console.log(data);
+    // Burada kayıt işlemlerini yapacaksınız
+    // Başarılı kayıt sonrası Login sayfasına yönlendirme
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+      className="min-h-screen flex items-center justify-center"
+    >
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4">Register</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -43,7 +42,7 @@ function Register() {
               transition={{ type: "spring", stiffness: 300 }}
               type="text"
               {...register("name")}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full mt-2 p-2 border rounded"
             />
             {errors.name && (
               <p className="text-red-500">{errors.name.message}</p>
@@ -56,7 +55,7 @@ function Register() {
               transition={{ type: "spring", stiffness: 300 }}
               type="email"
               {...register("email")}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full mt-2 p-2 border rounded"
             />
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
@@ -69,27 +68,29 @@ function Register() {
               transition={{ type: "spring", stiffness: 300 }}
               type="password"
               {...register("password")}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full mt-2 p-2 border rounded"
             />
             {errors.password && (
               <p className="text-red-500">{errors.password.message}</p>
             )}
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full bg-primary text-white py-3 rounded-md hover:bg-primary-dark transition duration-300"
+            className="w-full bg-blue-500 text-white py-2 rounded"
           >
             Register
-          </button>
+          </motion.button>
         </form>
         <p className="mt-4 text-center">
           Already have an account?{" "}
-          <Link to="/" className="text-accent">
+          <Link to="/" className="text-blue-500">
             Login
           </Link>
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

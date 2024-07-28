@@ -1,27 +1,15 @@
 import { motion } from "framer-motion";
 import { posts, followers } from "../assets/mockData";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
+import { containerVariants, itemVariants } from "../utils/animations";
 
 function Analytics() {
   return (
-    <div className="min-h-screen p-4">
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      className="min-h-screen p-4"
+    >
       <h1 className="text-3xl font-bold mb-4">Analytics</h1>
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -76,7 +64,7 @@ function Analytics() {
           </motion.ul>
         </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 

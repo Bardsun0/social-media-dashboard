@@ -1,45 +1,27 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const pageVariants = {
-  initial: { opacity: 0, y: "-100vh" },
-  in: { opacity: 1, y: 0 },
-  out: { opacity: 0, y: "100vh" },
-};
-
-const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
-  duration: 0.5,
-};
-
-// Yup doğrulama şeması
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Geçerli bir e-posta girin")
-    .required("E-posta zorunludur"),
-  password: yup
-    .string()
-    .min(6, "Şifre en az 6 karakter olmalıdır")
-    .required("Şifre zorunludur"),
-});
+import { pageTransition, pageVariants } from "../utils/animations";
+import { loginSchema } from "../utils/validationSchemas";
 
 function Login() {
+  const navigate = useNavigate();
+
   // react-hook-form ile form yönetimi
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = (data) => {
     console.log(data);
+    // Burada giriş işlemlerini yapacaksınız
+    // Başarılı giriş sonrası Dashboard sayfasına yönlendirme
+    navigate("/dashboard");
   };
 
   return (
