@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -44,7 +43,7 @@ function Register() {
               transition={{ type: "spring", stiffness: 300 }}
               type="text"
               {...register("name")}
-              className="w-full mt-2 p-2 border rounded"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.name && (
               <p className="text-red-500">{errors.name.message}</p>
@@ -57,7 +56,7 @@ function Register() {
               transition={{ type: "spring", stiffness: 300 }}
               type="email"
               {...register("email")}
-              className="w-full mt-2 p-2 border rounded"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
@@ -70,7 +69,7 @@ function Register() {
               transition={{ type: "spring", stiffness: 300 }}
               type="password"
               {...register("password")}
-              className="w-full mt-2 p-2 border rounded"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.password && (
               <p className="text-red-500">{errors.password.message}</p>
@@ -78,14 +77,14 @@ function Register() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded"
+            className="w-full bg-primary text-white py-3 rounded-md hover:bg-primary-dark transition duration-300"
           >
             Register
           </button>
         </form>
         <p className="mt-4 text-center">
           Already have an account?{" "}
-          <Link to="/" className="text-blue-500">
+          <Link to="/" className="text-accent">
             Login
           </Link>
         </p>
