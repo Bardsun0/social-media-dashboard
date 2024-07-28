@@ -8,7 +8,7 @@ function Analytics() {
       initial="initial"
       animate="in"
       exit="out"
-      className="min-h-screen p-4"
+      className="min-h-screen p-4 pt-28"
     >
       <h1 className="text-3xl font-bold mb-4">Analytics</h1>
       <motion.div

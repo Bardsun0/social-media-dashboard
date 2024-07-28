@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function Dashboard() {
   return (
-    <div className="min-h-screen font-sans text-text p-4">
-      <h1 className="text-4xl font-heading font-bold mb-8 text-primary">
+    <div className="min-h-screen font-sans text-black p-4 pt-28">
+      <h1 className="text-4xl font-heading font-bold mb-8">
         Dashboard
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -35,7 +35,7 @@ function DashboardCard({ to, title, description }) {
         to={to}
         className="block bg-white p-6 rounded-lg shadow-card hover:shadow-lg transition duration-300"
       >
-        <h2 className="text-2xl font-heading font-bold text-primary mb-2">
+        <h2 className="text-2xl font-heading font-bold mb-2">
           {title}
         </h2>
         <p className="text-text">{description}</p>
