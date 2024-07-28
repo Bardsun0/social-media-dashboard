@@ -4,15 +4,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#590303",
+        primary: {
+          DEFAULT: "#590303",
+          light: "#7a0404",
+        },
         secondary: "#2ecc71",
-        background: "#f5f7fa",
-        text: "#2c3e50",
+        text: {
+          dark: "#2c3e50",
+          light: "#ecf0f1",
+        },
         accent: "#e74c3c",
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"],
-        heading: ["Montserrat", "sans-serif"],
+        heading: ["Playfair Display", "serif"],
+        body: ["Lato", "sans-serif"],
+        accent: ["Caveat", "cursive"],
       },
       boxShadow: {
         card: "0 4px 6px rgba(0, 0, 0, 0.1)",
