@@ -1,3 +1,6 @@
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -13,7 +16,32 @@ const pageTransition = {
   duration: 0.5,
 };
 
+// Yup doğrulama şeması
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Geçerli bir e-posta girin")
+    .required("E-posta zorunludur"),
+  password: yup
+    .string()
+    .min(6, "Şifre en az 6 karakter olmalıdır")
+    .required("Şifre zorunludur"),
+});
+
 function Login() {
+  // react-hook-form ile form yönetimi
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <motion.div
       initial="initial"
@@ -25,15 +53,19 @@ function Login() {
     >
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               type="email"
+              {...register("email")}
               className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
@@ -41,8 +73,12 @@ function Login() {
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               type="password"
+              {...register("password")}
               className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
             />
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
           </div>
           <button
             type="submit"
