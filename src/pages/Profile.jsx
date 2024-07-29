@@ -3,8 +3,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
 import { profileSchema } from "../utils/validationSchemas";
 import { pageTransition, pageVariants } from "../utils/animations";
+import { useDispatch, useSelector } from "react-redux";
+import api from "../utils/api";
 
 function Profile() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
   // react-hook-form ile form yönetimi
   const {
     register,
@@ -12,11 +17,16 @@ function Profile() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(profileSchema),
+    defaultValues: user,
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Burada profil güncelleme işlemlerini yapacaksınız
+  const onSubmit = async (data) => {
+    try {
+      const response = await api.put("/profile", data);
+      // Profil güncelleme başarılı olduğunda yapılacak işlemler
+    } catch (error) {
+      // Hata durumunda yapılacak işlemler
+    }
   };
 
   return (

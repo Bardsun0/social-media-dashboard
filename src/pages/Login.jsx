@@ -4,9 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { pageTransition, pageVariants } from "../utils/animations";
 import { loginSchema } from "../utils/validationSchemas";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest } from "../redux/actions/authActions";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
   // react-hook-form ile form yönetimi
   const {
@@ -18,8 +22,8 @@ function Login() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     // Burada giriş işlemlerini yapacaksınız
+    dispatch(loginRequest(data));
     // Başarılı giriş sonrası Dashboard sayfasına yönlendirme
     navigate("/dashboard");
   };

@@ -3,8 +3,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
 import { postScheduleSchema } from "../utils/validationSchemas";
 import { pageTransition, pageVariants } from "../utils/animations";
+import { useSelector } from "react-redux";
+import api from "../utils/api";
 
 function PostSchedule() {
+  const { user } = useSelector((state) => state.auth);
+
   // react-hook-form ile form yönetimi
   const {
     register,
@@ -14,9 +18,13 @@ function PostSchedule() {
     resolver: yupResolver(postScheduleSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Burada post planlama işlemlerini yapacaksınız
+  const onSubmit = async (data) => {
+    try {
+      const response = await api.post("/schedule-post", data);
+      // Post planlama başarılı olduğunda yapılacak işlemler
+    } catch (error) {
+      // Hata durumunda yapılacak işlemler
+    }
   };
 
   return (
@@ -50,7 +58,9 @@ function PostSchedule() {
             )}
           </div>
           <div className="mb-4">
-            <label className="block text-text-dark font-body text-xl">Media</label>
+            <label className="block text-text-dark font-body text-xl">
+              Media
+            </label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -63,7 +73,9 @@ function PostSchedule() {
             )}
           </div>
           <div className="mb-4">
-            <label className="block text-text-dark font-body text-xl">Schedule Date</label>
+            <label className="block text-text-dark font-body text-xl">
+              Schedule Date
+            </label>
             <motion.input
               whileFocus={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}

@@ -1,8 +1,15 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { pageTransition, pageVariants } from "../utils/animations";
+import { useSelector } from "react-redux";
 
 function Dashboard() {
+  const { user } = useSelector((state) => state.auth);
+
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <motion.div
       initial="initial"

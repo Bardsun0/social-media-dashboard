@@ -1,15 +1,36 @@
-import axios from "axios";
+// src/redux/actions/authActions.js
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logout,
+  registerStart,
+  registerSuccess,
+  registerFailure,
+} from "../slices/authSlice";
+import api from "../../utils/api";
 
 export const loginRequest = (credentials) => async (dispatch) => {
-  dispatch({ type: "LOGIN_REQUEST" });
+  dispatch(loginStart());
   try {
-    const response = await axios.post("/api/login", credentials);
-    dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
+    const response = await api.post("/login", credentials);
+    dispatch(loginSuccess(response.data));
   } catch (error) {
-    dispatch({ type: "LOGIN_FAILURE", payload: error.message });
+    dispatch(loginFailure(error.message));
   }
 };
 
-export const logout = () => ({
-  type: "LOGOUT",
-});
+export const registerRequest = (userData) => async (dispatch) => {
+  dispatch(registerStart());
+  try {
+    const response = await api.post("/register", userData);
+    dispatch(registerSuccess(response.data));
+  } catch (error) {
+    dispatch(registerFailure(error.message));
+  }
+};
+
+export const logoutAction = () => (dispatch) => {
+  // API çağrısı gerekiyorsa burada yapabilirsiniz
+  dispatch(logout());
+};

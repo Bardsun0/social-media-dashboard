@@ -1,8 +1,27 @@
 import { motion } from "framer-motion";
 import { posts, followers } from "../assets/mockData";
 import { containerVariants, itemVariants } from "../utils/animations";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import api from "../utils/api";
 
 function Analytics() {
+  const { user } = useSelector((state) => state.auth);
+  const [analyticsData, setAnalyticsData] = useState(null);
+
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        const response = await api.get("/analytics");
+        setAnalyticsData(response.data);
+      } catch (error) {
+        // Hata durumunda yapılacak işlemler
+      }
+    };
+
+    fetchAnalytics();
+  }, []);
+
   return (
     <motion.div
       initial="initial"

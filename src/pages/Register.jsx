@@ -4,9 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { registerSchema } from "../utils/validationSchemas";
 import { pageTransition, pageVariants } from "../utils/animations";
+import { useDispatch, useSelector } from "react-redux";
+import { registerRequest } from "../redux/actions/authActions";
 
 function Register() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
   // react-hook-form ile form yönetimi
   const {
@@ -20,6 +24,7 @@ function Register() {
   const onSubmit = (data) => {
     console.log(data);
     // Burada kayıt işlemlerini yapacaksınız
+    dispatch(registerRequest(data));
     // Başarılı kayıt sonrası Login sayfasına yönlendirme
     navigate("/Dashboard");
   };
