@@ -6,6 +6,7 @@ import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import PostSchedule from "../pages/PostSchedule";
 import Analytics from "../pages/Analytics";
+import Home from "../pages/Home";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -13,7 +14,8 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />

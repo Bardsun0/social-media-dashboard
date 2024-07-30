@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -8,10 +9,10 @@ const Header = () => {
       transition={{ duration: 0.5 }}
       className="bg-primary text-text-light p-4 fixed top-0 left-0 right-0 z-10"
     >
-      <h1 className="text-5xl font-heading font-bold text-center">
+      <Link to="/" className="text-5xl font-heading font-bold">
         <span className="text-secondary">Social</span> Media{" "}
         <span className="text-accent font-accent">Dashboard</span>
-      </h1>
+      </Link>
     </motion.header>
   );
 };
