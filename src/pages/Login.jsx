@@ -6,11 +6,12 @@ import { pageTransition, pageVariants } from "../utils/animations";
 import { loginSchema } from "../utils/validationSchemas";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest } from "../redux/actions/authActions";
+import { useEffect } from "react";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error, user } = useSelector((state) => state.auth);
 
   // react-hook-form ile form yönetimi
   const {
@@ -21,11 +22,20 @@ function Login() {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data) => {
-    // Burada giriş işlemlerini yapacaksınız
-    dispatch(loginRequest(data));
-    // Başarılı giriş sonrası Dashboard sayfasına yönlendirme
-    navigate("/dashboard");
+  useEffect(() => {
+    if (user) {
+      // Başarılı giriş sonrası Dashboard sayfasına yönlendirme
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
+
+  const onSubmit = async (data) => {
+    try {
+      // Burada giriş işlemlerini yapacaksınız
+      await dispatch(loginRequest(data));
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   return (

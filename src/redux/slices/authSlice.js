@@ -1,4 +1,3 @@
-// src/redux/slices/authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -17,7 +16,12 @@ const authSlice = createSlice({
     },
     loginSuccess: (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = {
+        uid: action.payload.uid,
+        email: action.payload.email,
+        displayName: action.payload.displayName,
+        // Diğer gerekli kullanıcı bilgileri...
+      };
       state.error = null;
     },
     loginFailure: (state, action) => {

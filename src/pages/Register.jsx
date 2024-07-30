@@ -6,11 +6,12 @@ import { registerSchema } from "../utils/validationSchemas";
 import { pageTransition, pageVariants } from "../utils/animations";
 import { useDispatch, useSelector } from "react-redux";
 import { registerRequest } from "../redux/actions/authActions";
+import { useEffect } from "react";
 
 function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error, user } = useSelector((state) => state.auth);
 
   // react-hook-form ile form yönetimi
   const {
@@ -21,12 +22,20 @@ function Register() {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Burada kayıt işlemlerini yapacaksınız
-    dispatch(registerRequest(data));
-    // Başarılı kayıt sonrası Login sayfasına yönlendirme
-    navigate("/Dashboard");
+  useEffect(() => {
+    if (user) {
+      // Başarılı kayıt sonrası Login sayfasına yönlendirme
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
+
+  const onSubmit = async (data) => {
+    try {
+      // Burada kayıt işlemlerini yapacaksınız
+      await dispatch(registerRequest(data));
+    } catch (error) {
+      console.error("Register error:", error);
+    }
   };
 
   return (

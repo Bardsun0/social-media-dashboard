@@ -1,36 +1,62 @@
-// src/redux/actions/authActions.js
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth, db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
 import {
   loginStart,
   loginSuccess,
   loginFailure,
-  logout,
   registerStart,
   registerSuccess,
   registerFailure,
 } from "../slices/authSlice";
-import api from "../../utils/api";
-
-export const loginRequest = (credentials) => async (dispatch) => {
-  dispatch(loginStart());
-  try {
-    const response = await api.post("/login", credentials);
-    dispatch(loginSuccess(response.data));
-  } catch (error) {
-    dispatch(loginFailure(error.message));
-  }
-};
 
 export const registerRequest = (userData) => async (dispatch) => {
   dispatch(registerStart());
   try {
-    const response = await api.post("/register", userData);
-    dispatch(registerSuccess(response.data));
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      userData.email,
+      userData.password
+    );
+    await updateProfile(userCredential.user, { displayName: userData.name });
+
+    await setDoc(doc(db, "users", userCredential.user.uid), {
+      name: userData.name,
+      email: userData.email,
+    });
+
+    dispatch(
+      registerSuccess({
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        displayName: userData.name,
+      })
+    );
   } catch (error) {
     dispatch(registerFailure(error.message));
   }
 };
 
-export const logoutAction = () => (dispatch) => {
-  // API çağrısı gerekiyorsa burada yapabilirsiniz
-  dispatch(logout());
+export const loginRequest = (credentials) => async (dispatch) => {
+  dispatch(loginStart());
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      credentials.email,
+      credentials.password
+    );
+    dispatch(
+      loginSuccess({
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        displayName: userCredential.user.displayName,
+      })
+    );
+  } catch (error) {
+    dispatch(loginFailure(error.message));
+  }
 };
